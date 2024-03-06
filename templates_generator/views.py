@@ -34,6 +34,8 @@ def generate_template(request):
                  return render(request, 'restaurant_template/index.html', {'template_html': website_template.template_html})
             elif website_template.template_html =='barber':
                  return render(request, 'barbershop_template/index.html', {'template_html': website_template.template_html})
+            elif website_template.template_html =='portfolio':
+                 return render(request, 'portfolio_template/index.html', {'template_html': website_template.template_html})
 
         else:
             return render(request, 'error.html', {'message': 'Template not found for selected business type'})
