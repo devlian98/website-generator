@@ -28,8 +28,13 @@ def generate_template(request):
     if request.method == 'POST':
         business_type_id = request.POST.get('business_type')
         website_template = WebsiteTemplate.objects.filter(business_type=business_type_id).first()
+        print(website_template.template_html)
         if website_template:
-            return render(request, 'restaurant_template/index.html', {'template_html': website_template.template_html})
+            if  website_template.template_html =='restaurant':
+                 return render(request, 'restaurant_template/index.html', {'template_html': website_template.template_html})
+            elif website_template.template_html =='barber':
+                 return render(request, 'barbershop_template/index.html', {'template_html': website_template.template_html})
+
         else:
             return render(request, 'error.html', {'message': 'Template not found for selected business type'})
     return render(request, 'error.html', {'message': 'Invalid request'})
