@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
 
 # Application definition
 
@@ -38,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'templates_generator',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -52,10 +60,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'website_generator.urls'
 
+import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'website-generator-frontend/build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +138,7 @@ STATIC_URL = '/static/'
 
 # Only needed if you have project-wide static files not tied to an app
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR , 'website-generator-frontend/build/static')
 ]
 
 
